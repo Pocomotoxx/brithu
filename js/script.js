@@ -212,5 +212,9 @@ class DemoCRMSystem {
 
 // Initialize the demo system when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    new DemoCRMSystem();
+    const crm = new DemoCRMSystem();
+    const clientId = document.getElementById('g_id_onload').getAttribute('data-client_id');
+    if (!clientId || clientId === 'YOUR_GOOGLE_CLIENT_ID') {
+        crm.showNotification('Kérjük, adja meg a Google Client ID-t a bejelentkezéshez!', 'red');
+    }
 });

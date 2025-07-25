@@ -144,6 +144,7 @@
 .login-modal {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
+    z-index: 50;
 }
 .win8-tile {
     aspect-ratio: 1;
