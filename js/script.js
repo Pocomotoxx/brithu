@@ -30,8 +30,8 @@ function decodeJwtResponse(token) {
     return JSON.parse(jsonPayload);
 };
 
-// Demo CRM System Class
-class DemoCRMSystem {
+// CRM System Class
+class CRMSystem {
     constructor() {
         this.isLoggedIn = false;
         this.services = {
@@ -62,7 +62,7 @@ class DemoCRMSystem {
 
     init() {
         this.bindEvents();
-        this.showDemoNotification();
+        this.showNotification();
         this.initSidebar();
     }
 
@@ -72,7 +72,7 @@ class DemoCRMSystem {
         document.getElementById('close-login').addEventListener('click', () => this.hideLoginModal());
 
         // Tour modal
-        document.getElementById('demo-tour-btn').addEventListener('click', () => this.showTourModal());
+        document.getElementById('tour-btn').addEventListener('click', () => this.showTourModal());
         document.getElementById('close-tour').addEventListener('click', () => this.hideTourModal());
 
         // Service modal
@@ -99,13 +99,13 @@ class DemoCRMSystem {
         // Sidebar items already have click handlers from the main bindEvents
     }
 
-    showDemoNotification() {
+    showNotification() {
         setTimeout(() => {
-            document.getElementById('demo-notification').classList.add('show');
+            document.getElementById('notification').classList.add('show');
         }, 1000);
 
         setTimeout(() => {
-            document.getElementById('demo-notification').classList.remove('show');
+            document.getElementById('notification').classList.remove('show');
         }, 8000);
     }
 
@@ -154,29 +154,7 @@ class DemoCRMSystem {
     showServiceModal(service) {
         document.getElementById('service-title').textContent = service.name;
         document.getElementById('service-content').innerHTML = `
-            <div class="text-center">
-                <div class="text-6xl mb-4">🎯</div>
-                <h3 class="text-2xl font-bold mb-2">${service.name} - Demó Mód</h3>
-                <p class="mb-4">Valós környezetben itt jelenne meg a(z) ${service.name} teljes felülete.</p>
-                <div class="bg-blue-50 p-6 rounded-lg inline-block max-w-md">
-                    <p class="text-sm text-blue-700 mb-2">
-                        <strong>Éles verzióban:</strong>
-                    </p>
-                    <ul class="text-xs text-blue-600 text-left space-y-1">
-                        <li>✓ Teljes ${service.name} integráció</li>
-                        <li>✓ SSO bejelentkezés</li>
-                        <li>✓ Valós adatok szinkronizálása</li>
-                        <li>✓ Offline működés</li>
-                        <li>✓ Mobilbarát felület</li>
-                    </ul>
-                </div>
-                <div class="mt-4">
-                    <button onclick="window.open('${service.url}', '_blank')"
-                            class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg">
-                        📱 Nyitás eredeti oldalon
-                    </button>
-                </div>
-            </div>
+            <iframe src="${service.url}" class="service-iframe"></iframe>
         `;
         document.getElementById('service-modal').classList.remove('hidden');
     }
@@ -206,13 +184,13 @@ class DemoCRMSystem {
     }
 
     logEvent(eventType, data) {
-        console.log(`Demo Event: ${eventType}`, data);
+        console.log(`Event: ${eventType}`, data);
     }
 }
 
-// Initialize the demo system when page loads
+// Initialize the system when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const crm = new DemoCRMSystem();
+    const crm = new CRMSystem();
     const clientId = document.getElementById('g_id_onload').getAttribute('data-client_id');
     if (!clientId || clientId === 'YOUR_GOOGLE_CLIENT_ID') {
         crm.showNotification('Kérjük, adja meg a Google Client ID-t a bejelentkezéshez!', 'red');

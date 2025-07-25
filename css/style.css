@@ -52,7 +52,7 @@
     from, to { border-color: transparent }
     50% { border-color: #3B82F6 }
 }
-.demo-notification {
+.notification {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -65,7 +65,7 @@
     transform: translateX(400px);
     transition: transform 0.5s ease;
 }
-.demo-notification.show {
+.notification.show {
     transform: translateX(0);
 }
 .pulse-dot {
@@ -85,7 +85,7 @@
     font-size: 18px;
     color: #4a5568;
 }
-.demo-badge {
+.badge {
     position: absolute;
     top: -8px;
     right: -8px;
