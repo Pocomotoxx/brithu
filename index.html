@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civil CRM – Interaktív Demó</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tile { background:white; border-radius:0.5rem; box-shadow:0 1px 2px rgba(0,0,0,0.1); transition:box-shadow 0.2s; cursor:pointer; padding:1.5rem; text-align:center; }
+        .tile:hover { box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+        .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.5); }
+        .modal.show { display:flex; }
+        .modal-content { background:white; border-radius:0.5rem; padding:1.5rem; max-width:32rem; width:100%; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-white shadow p-4 mb-6">
+        <h1 class="text-2xl font-bold text-center">Civil CRM – Demó</h1>
+    </header>
+
+    <main class="container mx-auto px-4 flex-1">
+        <p class="text-center mb-6">Ez a demó a Civil CRM fő moduljait mutatja be.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="tile" data-module="Kapcsolatkezelés">Kapcsolatkezelés</div>
+            <div class="tile" data-module="Eseménymenedzsment">Események</div>
+            <div class="tile" data-module="Adománymenedzsment">Adományok</div>
+            <div class="tile" data-module="Kommunikációs Modul">Kommunikáció</div>
+            <div class="tile" data-module="Projektmenedzsment">Projektek</div>
+            <div class="tile" data-module="Dokumentumkezelés">Dokumentumok</div>
+            <div class="tile" data-module="Pénzügyi modul">Pénzügy</div>
+            <div class="tile" data-module="Jelentéskészítés">Jelentések</div>
+            <div class="tile" data-module="Jogosultságkezelés">Jogosultságok</div>
+            <div class="tile" data-module="Integrációk">Integrációk</div>
+        </div>
+    </main>
+
+    <div id="module-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="module-title" class="text-xl font-bold"></h2>
+                <button id="close-modal" class="text-gray-600">✖</button>
+            </div>
+            <p id="module-body" class="text-sm text-gray-700"></p>
+        </div>
+    </div>
+
+    <script>
+        const moduleInfo = {
+            'Kapcsolatkezelés': 'Tagnyilvántartás, adományozók és önkéntesek kezelése, szegmentáció.',
+            'Eseménymenedzsment': 'Események létrehozása, naptárintegráció, jelenléti ívek és emlékeztetők.',
+            'Adománymenedzsment': 'Adományok rögzítése, köszönőlevelek, online fizetési integrációk.',
+            'Kommunikációs Modul': 'Csoportos e-mailek, sablonok, kampánymenedzsment.',
+            'Projektmenedzsment': 'Projektek, feladatok, határidők és státuszjelentések kezelése.',
+            'Dokumentumkezelés': 'Google Drive integráció, dokumentumszinkron és jogosultságkezelés.',
+            'Pénzügyi modul': 'Tagdíjak, kiadások, bevételek, pénzügyi riportok és figyelmeztetések.',
+            'Jelentéskészítés': 'Riportok tagságról, eseményekről, adományokról; PDF/CSV export.',
+            'Jogosultságkezelés': 'Többszintű hozzáférés, auditnapló, felhasználói aktivitás.',
+            'Integrációk': 'Google Workspace, Microsoft 365 és fizetési rendszerek integrációja.'
+        };
+
+        document.querySelectorAll('[data-module]').forEach(tile => {
+            tile.addEventListener('click', () => {
+                const module = tile.dataset.module;
+                document.getElementById('module-title').textContent = module;
+                document.getElementById('module-body').textContent = moduleInfo[module];
+                document.getElementById('module-modal').classList.add('show');
+            });
+        });
+
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.getElementById('module-modal').classList.remove('show');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // későbbi inicializálás helye
+        });
+    </script>
+</body>
+</html>
